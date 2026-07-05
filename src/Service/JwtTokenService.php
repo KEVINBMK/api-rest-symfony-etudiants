@@ -8,10 +8,6 @@ use App\Entity\User;
 
 class JwtTokenService
 {
-    public function __construct(private readonly string $jwtSecret = '')
-    {
-    }
-
     public function createToken(User $user): string
     {
         $header = ['alg' => 'HS256', 'typ' => 'JWT'];
@@ -62,7 +58,7 @@ class JwtTokenService
 
     private function getSecret(): string
     {
-        return $this->jwtSecret !== '' ? $this->jwtSecret : (string) ($_ENV['JWT_SECRET'] ?? 'change_this_secret');
+        return (string) ($_ENV['JWT_SECRET'] ?? $_SERVER['JWT_SECRET'] ?? 'change_this_secret');
     }
 
     private function base64UrlEncode(string $value): string

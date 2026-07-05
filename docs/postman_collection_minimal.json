@@ -1,0 +1,68 @@
+{
+  "info": {
+    "name": "API REST Symfony Etudiants",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {"key": "base_url", "value": "http://127.0.0.1:8000/api"},
+    {"key": "token", "value": ""}
+  ],
+  "item": [
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "url": "{{base_url}}/register",
+        "body": {"mode": "raw", "raw": "{\"nom\":\"Administrateur\",\"email\":\"admin@example.com\",\"password\":\"password123\"}"}
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "url": "{{base_url}}/login",
+        "body": {"mode": "raw", "raw": "{\"email\":\"admin@example.com\",\"password\":\"password123\"}"}
+      }
+    },
+    {
+      "name": "Me",
+      "request": {
+        "method": "GET",
+        "auth": {"type": "bearer", "bearer": [{"key": "token", "value": "{{token}}", "type": "string"}]},
+        "url": "{{base_url}}/me"
+      }
+    },
+    {
+      "name": "Create Etudiant",
+      "request": {
+        "method": "POST",
+        "auth": {"type": "bearer", "bearer": [{"key": "token", "value": "{{token}}", "type": "string"}]},
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "url": "{{base_url}}/etudiants",
+        "body": {"mode": "raw", "raw": "{\"matricule\":\"ETU-001\",\"nom\":\"Bitubisha\",\"postnom\":\"Mbemba\",\"prenom\":\"Kevin\",\"email\":\"kevin@example.com\",\"telephone\":\"+243000000000\"}"}
+      }
+    },
+    {
+      "name": "Create Cours",
+      "request": {
+        "method": "POST",
+        "auth": {"type": "bearer", "bearer": [{"key": "token", "value": "{{token}}", "type": "string"}]},
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "url": "{{base_url}}/cours",
+        "body": {"mode": "raw", "raw": "{\"code\":\"INFO-101\",\"intitule\":\"Ingenierie logicielle\",\"description\":\"Cours de conception logicielle\",\"credits\":4}"}
+      }
+    },
+    {
+      "name": "Create Inscription",
+      "request": {
+        "method": "POST",
+        "auth": {"type": "bearer", "bearer": [{"key": "token", "value": "{{token}}", "type": "string"}]},
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "url": "{{base_url}}/inscriptions",
+        "body": {"mode": "raw", "raw": "{\"etudiant_id\":1,\"cours_id\":1}"}
+      }
+    }
+  ]
+}
